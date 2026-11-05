@@ -730,8 +730,7 @@ checksum = "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548"
 [[package]]
 name = "pocketstation"
 version = "1.1.16"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c7143c0fb788141a71fcb0b4195b91ea4c86be1cd278f75b0344dff8d42ef59b"
+source = "git+https://github.com/BluSpring/pocketstation#6f7c3915e4382af842615967ba6efb34a759b485"
 dependencies = [
  "alsa",
  "cc",

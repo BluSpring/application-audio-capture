@@ -10,8 +10,10 @@ fun main() {
     }
 
     val session = ApplicationAudioCapture.createCapture(48_000, 2) { data ->
-        println(data)
+        val array = ByteArray(data.remaining())
+        data.get(array)
+        println(array.contentToString())
     }
 
-    session.captureSystem()
+    session.capture("thorium")
 }
