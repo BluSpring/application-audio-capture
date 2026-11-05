@@ -2,7 +2,7 @@ package xyz.bluspring.unitytranslate.capture.application
 
 import kotlin.concurrent.thread
 
-class AudioCaptureData(val sampleRate: Int, val channels: Int, private val callbackPtr: Long) {
+class AudioCaptureData(val sampleRate: Int, val channels: Int, private val callback: AudioCaptureFrameEvent) {
     private var activeSession: RunningAudioSession? = null
         set(value) {
             field = value
@@ -22,7 +22,7 @@ class AudioCaptureData(val sampleRate: Int, val channels: Int, private val callb
         if (this.activeSession != null)
             throw IllegalStateException("There is already an active audio capture session!")
 
-        val ptr = ApplicationAudioCapture.startCaptureId(this.sampleRate, this.channels.toByte(), processId, this.callbackPtr)
+        val ptr = ApplicationAudioCapture.startCaptureId(this.sampleRate, this.channels.toByte(), processId, this.callback)
         val session = RunningAudioSession(this, ptr)
         this.activeSession = session
     }
@@ -31,7 +31,7 @@ class AudioCaptureData(val sampleRate: Int, val channels: Int, private val callb
         if (this.activeSession != null)
             throw IllegalStateException("There is already an active audio capture session!")
 
-        val ptr = ApplicationAudioCapture.startCaptureName(this.sampleRate, this.channels.toByte(), processName, this.callbackPtr)
+        val ptr = ApplicationAudioCapture.startCaptureName(this.sampleRate, this.channels.toByte(), processName, this.callback)
         val session = RunningAudioSession(this, ptr)
         this.activeSession = session
     }
@@ -40,7 +40,7 @@ class AudioCaptureData(val sampleRate: Int, val channels: Int, private val callb
         if (this.activeSession != null)
             throw IllegalStateException("There is already an active audio capture session!")
 
-        val ptr = ApplicationAudioCapture.startCaptureSystemAudio(this.sampleRate, this.channels.toByte(), this.callbackPtr)
+        val ptr = ApplicationAudioCapture.startCaptureSystemAudio(this.sampleRate, this.channels.toByte(), this.callback)
         val session = RunningAudioSession(this, ptr)
         this.activeSession = session
     }

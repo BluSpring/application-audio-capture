@@ -14,7 +14,7 @@ import kotlin.io.path.*
 
 object ApplicationAudioCapture {
     fun createCapture(sampleRate: Int, channels: Int, onCaptureAudio: AudioCaptureFrameEvent): AudioCaptureData {
-        return AudioCaptureData(sampleRate, channels, this.createCallback(onCaptureAudio))
+        return AudioCaptureData(sampleRate, channels, onCaptureAudio)
     }
 
     fun listAllSources(): List<SourceInfo> {
@@ -22,13 +22,11 @@ object ApplicationAudioCapture {
     }
 
     @ApiStatus.Internal
-    private external fun createCallback(callback: Any): Long
+    external fun startCaptureId(sampleRate: Int, channels: Byte, processId: Int, callback: AudioCaptureFrameEvent): Long
     @ApiStatus.Internal
-    external fun startCaptureId(sampleRate: Int, channels: Byte, processId: Int, callback: Long): Long
+    external fun startCaptureName(sampleRate: Int, channels: Byte, processName: String, callback: AudioCaptureFrameEvent): Long
     @ApiStatus.Internal
-    external fun startCaptureName(sampleRate: Int, channels: Byte, processName: String, callback: Long): Long
-    @ApiStatus.Internal
-    external fun startCaptureSystemAudio(sampleRate: Int, channels: Byte, callback: Long): Long
+    external fun startCaptureSystemAudio(sampleRate: Int, channels: Byte, callback: AudioCaptureFrameEvent): Long
     @ApiStatus.Internal
     external fun stopCapture(sessionPtr: Long)
 
