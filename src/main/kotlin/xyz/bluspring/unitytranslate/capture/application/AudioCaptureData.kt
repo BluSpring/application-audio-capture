@@ -1,7 +1,5 @@
 package xyz.bluspring.unitytranslate.capture.application
 
-import kotlin.concurrent.thread
-
 class AudioCaptureData(val sampleRate: Int, val channels: Int, private val callback: AudioCaptureFrameEvent) {
     private var activeSession: RunningAudioSession? = null
         set(value) {
@@ -46,11 +44,11 @@ class AudioCaptureData(val sampleRate: Int, val channels: Int, private val callb
     }
 
     private fun createBlockingThread() {
-        this.blockingThread = thread {
-            while (this.activeSession != null) {
-                Thread.sleep(1)
-            }
-        }
+//        this.blockingThread = thread {
+//            while (this.activeSession != null) {
+//                Thread.sleep(1)
+//            }
+//        }
     }
 
     fun stop() {
