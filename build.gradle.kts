@@ -17,11 +17,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-
     api(libs.bundles.kotlin)
     api(libs.slf4j.api)
-    testRuntimeOnly(libs.slf4j.simple)
 }
 
 java {
@@ -37,7 +34,6 @@ val rust = natives("ApplicationAudioCapture") {
 
     platform("windows", "x64")
 
-    // TODO: fix for every other platform
 //    platform("windows", "arm64")
 //    platform("windows", "arm64ec")
 
